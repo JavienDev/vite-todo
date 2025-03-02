@@ -5,7 +5,16 @@ export default {
 </script>
 
 <template>
-    <p>To-Do Item</p>
+  <div class="main-container">
+    iujd:Ext<p>We are inside of Todo Item</p>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.main-container {
+  padding: 50px;
+  text-align: center;
+  color: red;
+}
+
+</style
