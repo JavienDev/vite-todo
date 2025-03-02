@@ -1,36 +1,31 @@
-<script>
-import TodoItem from "./components/TodoItem.vue";
-import TodoCreator from "./components/TodoCreator.vue";
+<script setup>
+import { ref } from 'vue';
+import TodoCreator from './components/TodoCreator.vue';
+import TodoItem from './components/TodoItem.vue';
 
-export default {
-  components: {
-    TodoCreator
-  },
-  data() {
-    return {
-      todos: [],
-      isModalVisible: false  // Controls the visibility of the modal
-    };
-  },
-  methods: {
-    openModal() {
-      this.isModalVisible = true;  // Show the modal when button is clicked
-    },
-    closeModal() {
-      this.isModalVisible = false;  // Hide the modal
-    },
-    addTodo(newTodo) {
-      this.todos.push(newTodo);  // Add the new todo to the list
-      this.closeModal();  // Hide the modal after adding the todo
-    }
-  }
+const todos = ref([]);
+const isModalVisible = ref(false);
+
+const openModal = () => {
+  isModalVisible.value = true;
+};
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+const addTodo = (newTodo) => {
+  todos.value.push(newTodo);
+  closeModal();
+};
+
+const removeTodo = (index) => {
+  todos.value.splice(index, 1);
 };
 </script>
 
 <template>
   <div>
-    <TodoItem/>
-    <p>Hello, World!</p>
     <button @click="openModal">Add Todo</button>
 
     <TodoCreator
@@ -40,7 +35,13 @@ export default {
     />
 
     <ul>
-      <li v-for="(todo, index) in todos" :key="index">{{ todo }}</li>
+      <TodoItem
+        v-for="(todo, index) in todos"
+        :key="index"
+        :todo="todo"
+        :index="index"
+        @remove-todo="removeTodo"
+      />
     </ul>
   </div>
 </template>

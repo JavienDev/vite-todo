@@ -1,12 +1,28 @@
 <script lang="ts">
 export default {
-    name: "TodoItem"
+    name: "TodoItem",
+    props: {
+      todo: {
+        type: String,
+        required: true,
+      },
+      index: {
+        type: Number,
+        required: false
+      }
+    },
+    methods: {
+      removeTodo() {
+        this.$emit('remove-todo', this.index);
+      }
+    }
 }
 </script>
 
 <template>
   <div class="main-container">
-    iujd:Ext<p>We are inside of Todo Item</p>
+    {{ todo }}
+    <button @click="removeTodo">remove</button>
   </div>
 </template>
 
@@ -17,4 +33,4 @@ export default {
   color: red;
 }
 
-</style
+</style>

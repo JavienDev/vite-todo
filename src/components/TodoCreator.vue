@@ -1,39 +1,41 @@
-<script>
-export default {
-  props: {
-    isVisible: {
-      type: Boolean,
-      required: true,
-    }
-  },
-  data() {
-    return {
-      newTodo: ''
-    };
-  },
-  methods: {
-    submitTodo() {
-      if (this.newTodo.trim()) {
-        this.$emit('todo-added', this.newTodo);
-        this.newTodo = '';
-      }
-    },
-    closeModal() {
-      this.$emit('close');
-    }
-  }
-}
-</script>
 <template>
   <div v-if="isVisible" class="overlay" @click.self="closeModal">
-    <div class="moda">
-      <h2>Add a new Todo</h2>
-      <input v-model="newTodo" type="text" placeholder="What do you need to do?"/>
-      <button @click="submitTodo">Add todo</button>
-      <button @click="closeModal">Nevermind</button>
+    <div class="modal">
+      <h2>Add a New Todo</h2>
+      <input v-model="newTodo" type="text" placeholder="What do you need to do?" />
+      <button @click="submitTodo">Add Todo</button>
+      <button @click="closeModal">Cancel</button>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, defineProps, defineEmits } from 'vue';
+
+const props = defineProps({
+  isVisible: {
+    type: Boolean,
+    required: true,
+  }
+}); 
+
+const newTodo = ref('');
+
+const emit = defineEmits();
+
+const submitTodo = () => {
+  if (newTodo.value.trim()) {
+    emit('todo-added', newTodo.value);
+    emit('close');
+  }
+};
+
+const closeModal = () => {
+  emit('close');
+};
+
+</script>
+
 <style scoped>
 .overlay {
   position: fixed;
@@ -44,11 +46,13 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
+  
   align-items: center;
 }
 
 .modal {
   background-color: white;
+  color: black;
   padding: 20px;
   border-radius: 8px;
   width: 300px;
@@ -56,5 +60,9 @@ export default {
 }
 button {
   margin-top: 10px;
+}
+input {
+  padding: 10px;
+  border-radius: 8px;
 }
 </style>
