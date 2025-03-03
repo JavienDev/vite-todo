@@ -2,9 +2,9 @@
 
 
 ## Core Features 🚀
-- [~] User can add todos
+- [x] User can add todos
 - [ ] User can mark todos as complete
-- [ ] User can delete todos
+- [x] User can delete todos
 - [ ] Todos should be persistable (local?)
 
 ## Improvements
