@@ -1,36 +1,37 @@
-<script lang="ts">
-export default {
-    name: "TodoItem",
-    props: {
-      todo: {
-        type: String,
-        required: true,
-      },
-      index: {
-        type: Number,
-        required: false
-      }
-    },
-    methods: {
-      removeTodo() {
-        this.$emit('remove-todo', this.index);
-      }
-    }
-}
+<script setup>
+import Button from './Button.vue';
+const props = defineProps({
+  todo: {
+    type: String,
+    required: true,
+  },
+  index: {
+    type: Number,
+    required: false,
+  }
+});
+
+const emit = defineEmits();
+
+const removeTodo = () => {
+  emit('remove-todo', props.index);
+};
 </script>
 
 <template>
   <div class="main-container">
     {{ todo }}
-    <button @click="removeTodo">remove</button>
+    <Button variant="danger" @click="removeTodo"><span class="buttonText">remove</span></Button>
   </div>
 </template>
 
 <style scoped>
 .main-container {
-  padding: 50px;
+  padding: 5px;
   text-align: center;
-  color: red;
+  color: black;
 }
-
+.buttonText {
+  color: black;
+}
 </style>
