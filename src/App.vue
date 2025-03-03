@@ -25,6 +25,7 @@ const closeModal = () => {
 
 const addTodo = (newTodo) => {
   todos.value.push(newTodo);
+  showSuccessToast("A new todo has been succesfully added!");
   closeModal();
 };
 
@@ -32,11 +33,17 @@ const removeTodo = (index) => {
   todos.value.splice(index, 1);
 };
 
+
 const showSuccessToast = (msg) => {
     toastMessage.value = msg;
     toastType.value = "success";
     isToastVisible.value = true;  
+    setTimeout(() => {
+      isToastVisible.value = false;
+    }, 3000);
 }
+
+
 </script>
 
 <template>
