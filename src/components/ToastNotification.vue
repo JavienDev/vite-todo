@@ -1,7 +1,7 @@
 <template>
     <div
       v-if="isVisible"
-      class="fixed bottom-5 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow-lg transition-opacity duration-300"
+      class="fixed bottom-5 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow-lg transition-opacity ease-in-out duration-300"
       :class="toastClasses"
       @click="closeToast"
       :style="{ transition: `opacity ${duration / 1000}s`, zIndex: 9999 }"
