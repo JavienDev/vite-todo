@@ -42,9 +42,6 @@ const newTodo = ref('');
 const emit = defineEmits();
 
 const submitTodo = () => {
-
-
-  console.log("tracked");
   if (newTodo.value.trim()) {
       if (newTodo.length < 0) {
         toastMessage.value = "Cannot create an empty to-do";
@@ -54,8 +51,6 @@ const submitTodo = () => {
       return;
     }
     emit('todo-added', newTodo.value);
-    console.log("tracked 2");
-    showSuccessToast("you have succesfully added a new todo!");
     emit('close');
   }
 };
